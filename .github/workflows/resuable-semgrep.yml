@@ -2,13 +2,15 @@ name: Reusable workflow example
 
 on:
   workflow_call:
-
+    secrets:
+      SEMGREP_APP_ORG_TOKEN:
+        required: true
 jobs:
   semgrep:
     name: Scan
     runs-on: ubuntu-20.04
     env:
-      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_ORG_TOKEN }}
+      SEMGREP_APP_TOKEN: ${{ secrets.SEMGREP_APP_ORG_TOKEN }}
     container:
       image: returntocorp/semgrep
     steps:
